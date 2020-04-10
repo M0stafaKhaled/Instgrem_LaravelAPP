@@ -17,15 +17,13 @@
                 <div class="pr-5">following <strong>1k</strong></div>
             </div>
             <div class="pt-4 font-weight-bold">
-                Nero
+                {{$user->profile->title}}
             </div>
-            <div>created in black clover</div>
+            <div>{{$user->profile->description}} </div>
         </div>
-
     </div>
 
     <div class="row">
-
         <div class="col-4">
             <img src="image/4.png" class="w-100">
         </div>
