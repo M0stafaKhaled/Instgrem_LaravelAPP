@@ -10,7 +10,11 @@
         </div>
 
         <div class="col-9 pt-5">
-            <h1>{{$user->name}} </h1>
+            <div>
+                <h1>{{$user->name}} </h1>
+                <a href="#"> Add new Post</a>
+            </div>
+
             <div class="d-flex">
                 <div class="pr-5"> posts <strong>5</strong></div>
                 <div class="pr-5">followers <strong>12k</strong></div>
