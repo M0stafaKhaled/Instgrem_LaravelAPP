@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Intervention\Image\Facades\Image;
 
 
@@ -35,5 +36,10 @@ class PostController extends Controller
             'image' => $imagePaht
         ]);
         return redirect('/Profile/' .  auth()->user()->id);
+    }
+    public function show($post)
+    {
+        $post = Post::findOrFail($post);
+        return view('posts.show', compact('post'));
     }
 }
