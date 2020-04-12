@@ -3,25 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Intervention\Image\Facades\Image;
+
 
 class ProfileController extends Controller
 {
 
 
-    public function index($user)
+    public function index(User $user)
     {
-        $user = User::findOrFail($user);
-        return view('profile.index', [
-            'user' => $user,
 
-        ]);
+        return view('profile.index', compact('user'));
     }
     public function edit(User $user)
     {
+
+
+        $this->authorize('update', $user->profile);
         return view('profile.edit', compact('user'));
     }
-    public function update($data)
+    public function update(User $user)
     {
+        $this->authorize('update', $user->profile);
+        $data = request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => '',
+        ]);
+        if (request('image')) {
+
+            $imagePaht = request('image')->store('profile', 'public');
+            $image = Image::make(public_path("storage/{$imagePaht}"))->fit(1000, 1000);
+            $image->save();
+        }
+
+        auth()->user()->profile->update(array_merge($data, ['image' => $imagePaht]));
+        return redirect("/Profile/{$user->id}");
     }
 }

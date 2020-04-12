@@ -19,10 +19,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/Profile/{user}', 'ProfileController@index')->name('home');
-Route::get('/Profile/{user}/edit', 'ProfileController@edit');
-Route::patch('/Profile/{user}', 'ProfileController@update');
-Route::get('/p/create', 'PostController@create');
-Route::get('/p/{post}', 'PostController@show');
-
 Route::post('/p', 'PostController@store');
+Route::get('/p/create', 'PostController@create');
+
+Route::get('/p/{post}', 'PostController@show')->name('post.show');
+
+
+Route::patch('/Profile/{user}', 'ProfileController@update')->name('profile.updae');
+Route::get('/Profile/{user}', 'ProfileController@index')->name('home');
+Route::get('/Profile/{user}/edit', 'ProfileController@edit')->name('profile.edit');

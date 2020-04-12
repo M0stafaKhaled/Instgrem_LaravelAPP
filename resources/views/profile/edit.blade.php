@@ -3,8 +3,10 @@
 @section('content')
 <div class="container">
 
-    <form action="/p" method="POST" enctype="multipart/form-data">
+    <form action="/Profile/{{$user->id}}" method="POST" enctype="multipart/form-data">
+        @method('PATCH')
         @csrf
+
         <div class="row">
             <div class="col-8 offset-2">
                 <div>
@@ -13,7 +15,7 @@
                 <div class="form-group row">
                     <label for="title" class="col-md-4 col-form-label">Title</label>
 
-                    <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}" autocomplete="title" autofocus>
+                    <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') ?? $user->profile->title}}" autocomplete="title" autofocus>
                     @error('title')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -23,8 +25,8 @@
 
                     <label for="desciprion" class="col-md-4 col-form-label">Descripción</label>
 
-                    <input id="desciprion" type="text" class="form-control{{ $errors->has('desciprion') ? ' is-invalid' : '' }}" name="desciprion" value="{{ old('description') }}" autofocus>
-                    @error('desciprion')
+                    <input id="desciprion" type="text" class="form-control{{ $errors->has('desciprion') ? ' is-invalid' : '' }}" name="description" value="{{ old('description')  ??  $user->profile->description}}" autofocus>
+                    @error('description')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
