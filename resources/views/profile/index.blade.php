@@ -10,7 +10,11 @@
         </div>
         <div class="col-9 pt-5">
             <div class="d-flex justify-content-between">
-                <h1>{{$user->name}} </h1>
+
+                <div class="d-flex align-items-center pb-3">
+                    <div class="h4">{{$user->name}} </div>
+                    <follow-button></follow-button>
+                </div>
                 @can('update',$user->profile)
                 <a href="/p/create" class="d-flex justify-content-between"> Add new Post</a>
                 @endcan
