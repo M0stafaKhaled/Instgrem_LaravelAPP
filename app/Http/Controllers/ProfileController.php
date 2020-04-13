@@ -36,9 +36,10 @@ class ProfileController extends Controller
             $imagePaht = request('image')->store('profile', 'public');
             $image = Image::make(public_path("storage/{$imagePaht}"))->fit(1000, 1000);
             $image->save();
+            $imageArray = ['image' => $imagePaht];
         }
 
-        auth()->user()->profile->update(array_merge($data, ['image' => $imagePaht]));
+        auth()->user()->profile->update(array_merge($data, $imageArray ?? []));
         return redirect("/Profile/{$user->id}");
     }
 }
