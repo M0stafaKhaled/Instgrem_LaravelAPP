@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,14 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+
+    public const HOME = '/';
+
+    public function pr(User $user)
+    {
+
+        return redirect('/profile/' . $user->id);
+    }
 
     /**
      * Define your route model bindings, pattern filters, etc.
